@@ -1,0 +1,94 @@
+body{
+    background-color: gainsboro;
+}
+.container
+{
+    width:100%;
+    height:auto;
+    display: flex;
+    justify-content: center;
+
+}
+.signup
+{
+    margin-top: 110px;
+    display:flex;
+    width:70%;
+    height: auto;
+}
+.left-container
+{
+    background-color: teal;
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 40px;
+}
+.left-container h3{
+    color:white;
+    text-align: center;
+    margin-top: 130px;
+    font-size: 30px;
+    
+}
+img{
+    width:50%;
+    height:100%;
+    align-self: center;
+    margin-bottom: 50px;
+}
+.right-container
+{
+    background-color: white;
+    width:60%;
+    display: flex;
+    border-radius: 5px;
+}
+.right-container h3{
+    margin-top: 50px;
+}
+.form-content
+{
+    margin-left: 80px;
+
+}
+.inputs
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.inputs input{
+    width:150%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+.btn
+{
+    padding:8px;
+    width:50%;
+    background-color:teal;
+    border:none;
+    color: white;
+    font-weight: bold;
+}
+.inputs-signin
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.inputs-signin input{
+    width:80%;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+button{
+    cursor:pointer
+}
+.btn-flex{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
