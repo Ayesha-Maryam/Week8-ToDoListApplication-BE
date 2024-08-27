@@ -1,0 +1,47 @@
+
+.container2
+{
+    width:70%;
+    height: max-content;
+    background-color:teal;
+    color: white;
+    margin: auto;
+    border-radius:5px ;
+    margin-top: 20px;
+    display: block;
+    padding:30px;
+}
+.heading
+{
+font-size:x-large;
+}
+.tasks{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.task
+{
+    width: 80%;
+    height:20%;
+    border-radius: 5px;;
+    background-color: white;
+    color: rgb(49, 49, 49);
+    padding: 10px;
+}
+.details-status
+{
+    display:flex;
+    gap: 60%;
+}
+.status-btn{
+align-self: center;
+justify-self: center;
+}
+.status{
+    color: black;;
+    background-color: yellow;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+}

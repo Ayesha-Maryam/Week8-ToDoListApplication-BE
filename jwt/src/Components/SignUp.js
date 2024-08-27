@@ -13,7 +13,7 @@ export default function SignUp({username, setName, password, setPassword}) {
     {
         e.preventDefault();
         try{
-            await axios.post('http://localhost:8000/signup',
+            await axios.post('http://localhost:8000/users/signup',
                 {
                     username: username,
                     password: password

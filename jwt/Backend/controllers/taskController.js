@@ -28,7 +28,7 @@ catch(error)
 async function getAllTask(req, res)
 {
     try{
-        const task= await Task.findOne({userId:req.user.userId})
+        const task= await Task.find({userId:req.user.userId})
         if(!task)
         {
             return res.status(404).send("Task not Found")
@@ -37,7 +37,7 @@ async function getAllTask(req, res)
     }
     catch(error)
     {
-        return res.status(500).json({message:"Error in getting Task", error:error.mrssage})
+        return res.status(500).json({message:"Error in getting Task", error:error.message})
     }
 }
 

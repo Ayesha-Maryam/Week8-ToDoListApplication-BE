@@ -10,6 +10,7 @@ export default function Login({
   setName,
   password,
   setPassword,
+  user,setUser,task,setTask,
   accessToken,
   setAccessToken,
   refreshToken,
@@ -18,15 +19,33 @@ export default function Login({
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/login", {
+      const response = await axios.post("http://localhost:8000/users/login", {
         username,
         password,
-      });
-      if (response.data.accessToken) {
+      },
+      {
+        headers:
+        {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      }});
+      
+      if (!response.data) {
+        console.log("User Data not Found")
+      }
+
         setAccessToken(response.data.accessToken);
         setRefreshToken(response.data.refreshToken);
+        localStorage.setItem('currentUser', JSON.stringify(response.data))
+        const _response = await axios.get("http://localhost:8000/tasks",{
+          headers:{
+            Authorization: `Bearer ${response.data.accessToken}`
+          }
+        });
+        setUser(response.data)
+        setTask(_response.data || [])
         toast.success("Login Successful");
-      }
+      
     } catch (error) {
       toast.error("Login Failed");
       console.log(error.message);
@@ -34,7 +53,7 @@ export default function Login({
   };
   const handleProtected = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/protected", {
+      const response = await axios.get("http://localhost:8000/users/protected", {
         headers: { Authorization: `Bearer: ${accessToken}` },
       });
       toast.success(response.data.message);
@@ -51,7 +70,7 @@ export default function Login({
 
   const getRefreshToken = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/refresh-token", {
+      const response = await axios.post("http://localhost:8000/users/refresh-token", {
         refreshToken,
       });
       if (response.data.accessToken) {
