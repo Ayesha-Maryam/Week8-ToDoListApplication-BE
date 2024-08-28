@@ -3,13 +3,59 @@
 {
     width:70%;
     height: max-content;
-    background-color:teal;
+    background-color:#A18AFF;
+    display: flex;
     color: white;
     margin: auto;
     border-radius:5px ;
     margin-top: 20px;
-    display: block;
-    padding:30px;
+    border: 5px solid white;
+    padding:5px;
+}
+
+.side-panel{
+    width: 30%;
+    background-color: white;
+    color:rgb(44, 34, 43);
+    border-radius: 5px;
+    padding:10px;
+}
+hr
+{
+    width: 80%;
+}
+.task-type
+{
+padding:30px;
+}
+.task-type p{
+    font-weight: bold;
+    color:#717082;
+    cursor: pointer;
+}
+.name{
+    display:flex;
+    flex-direction: column;
+    gap:0px
+}
+.name h3{
+    margin-top:-20px
+}
+.img-name{
+    display:flex;
+    gap: 5px;
+}
+.img img{
+    margin-top: 10px;;
+    width: 70px;
+    height: 70px;
+}
+
+
+.main-container
+{
+    width: 70%;
+    padding: 30px;
 }
 .heading
 {
@@ -23,25 +69,144 @@ font-size:x-large;
 .task
 {
     width: 80%;
-    height:20%;
-    border-radius: 5px;;
+    height:30px;
+    border-radius: 20px;
     background-color: white;
     color: rgb(49, 49, 49);
     padding: 10px;
+    display: flex;
+    align-self: center;
 }
-.details-status
-{
-    display:flex;
-    gap: 60%;
+.details{
+    display: flex;
+    gap: 10%;
+    width: 60%;
 }
 .status-btn{
-align-self: center;
-justify-self: center;
+    width: 40%;
+    align-self: center;
+    display: flex;
 }
 .status{
-    color: black;;
-    background-color: yellow;
-    border-radius: 20px;
-    border: none;
-    padding: 10px;
+    color:#8263ff;
+    font-size: large;
+    justify-self: end;
 }
+.details h4{
+cursor: pointer;
+align-self: center;
+}
+.strike {
+    text-decoration: line-through;
+    color: grey;
+  }
+  .details-hr
+  {
+    width: 100%;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-color:#ffffff;
+    border-radius: 5px;
+    color: #4e4d5a;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-edit
+  {
+    text-align: left;
+    margin-top: 20px;
+  }
+  .sidebar-edit input{
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  } 
+  .sidebar-edit select{
+    width:57%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .sidebar-edit textarea{
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .sidebar-content {
+    margin: 0 auto;
+    color: #717082;
+  }
+  .sidebar h2{
+    color: black;
+  }
+  .sidebar-buttons {
+    margin-top: 20px;
+  }
+  
+  .sidebar-buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    background-color: #007bff;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: medium;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .sidebar-buttons button:last-child {
+    background-color: #dc3545;
+  }
+  .add-task
+  {
+    text-align: end;
+    width:90%;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: larger;
+  }
+  .dueDate-des
+  {
+    display: flex;
+    gap:2%;
+  }
+  .dueDate-des p{
+    font-size: large;
+  }
+  .status-des p{
+    font-size: large;
+  }
+  
+  .status-des
+  {
+    display: flex;
+    gap:2%;
+  }
+  .dueDate-des .head{
+    font-weight: bold;
+  }
+  .status-des .head{
+    font-weight: bold;
+  }
+  .submit-task-btn
+  {
+    padding: 10px; border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    background-color: #9980fc;
+  }
+  
