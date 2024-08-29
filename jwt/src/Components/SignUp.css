@@ -18,7 +18,7 @@ body{
 }
 .left-container
 {
-    background-color: teal;
+    background-color: #A18AFF;
     width:40%;
     display: flex;
     flex-direction: column;
@@ -69,10 +69,13 @@ img{
 {
     padding:8px;
     width:50%;
-    background-color:teal;
+    background-color:#987ffe;
     border:none;
     color: white;
     font-weight: bold;
+}
+.btn:hover{
+    background-color: #7758f1;
 }
 .inputs-signin
 {

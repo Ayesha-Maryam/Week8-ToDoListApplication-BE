@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import './SignUp.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import image from "./image.png";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -16,6 +16,7 @@ export default function Login({
   refreshToken,
   setRefreshToken,
 }) {
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -45,46 +46,15 @@ export default function Login({
         setUser(response.data)
         setTask(_response.data || [])
         toast.success("Login Successful");
+        navigate("/tasks")
       
     } catch (error) {
       toast.error("Login Failed");
       console.log(error.message);
     }
   };
-  const handleProtected = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/users/protected", {
-        headers: { Authorization: `Bearer: ${accessToken}` },
-      });
-      toast.success(response.data.message);
-    } catch (error) {
-      if (error.response.status === 403) {
-        const newAccessToken = await getRefreshToken();
-        if (newAccessToken) {
-          return handleProtected();
-        }
-      }
-      toast.error("Access Failed");
-    }
-  };
 
-  const getRefreshToken = async () => {
-    try {
-      const response = await axios.post("http://localhost:8000/users/refresh-token", {
-        refreshToken,
-      });
-      if (response.data.accessToken) {
-        setAccessToken(response.data.accessToken);
-        return response.data.accessToken;
-      } else {
-        toast.error("Session Expired");
-        return null;
-      }
-    } catch (error) {
-      toast.error("Failed to Refresh Token");
-      return null;
-    }
-  };
+  
   return (
     <div className="container">
     <div className="signup">
@@ -95,7 +65,7 @@ export default function Login({
       <div className="right-container">
         <div className="form-content">
           <h3>Login</h3>
-          <Link to="/signup">Don't have an account?</Link>
+          <Link to="/">Don't have an account?</Link>
           <form onSubmit={handleLogin}>
             <div className="inputs">
             <input
@@ -116,9 +86,6 @@ export default function Login({
             <button className="btn" type="submit">
               Login
             </button>
-            </div>
-            <div>
-            <button className="btn" onClick={handleProtected}>Access Routes</button>
             </div>
             </div>
           </form>

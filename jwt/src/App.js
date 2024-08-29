@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ShowTodo from "./Components/ShowTodo";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,12 +13,11 @@ function App() {
   const [refreshToken, setRefreshToken] = useState("");
   const [user, setUser] = useState("");
   const [task, setTask] = useState([]);
-
+const navigate=useNavigate();
   useEffect(() => {
     async function fetchUsers() {
-      console.log("Access Token:", accessToken);  
+      let currentUser= JSON.parse(localStorage.getItem('currentUser'));
       try{
-        const currentUser= JSON.parse(localStorage.getItem('currentUser'));
         if(currentUser)
         {
           const response=await axios.get("http://localhost:8000/tasks",{ headers: {
@@ -33,16 +32,33 @@ function App() {
       }
       catch(error)
       {
+        if(error.response.status===403)
+        {
+          currentUser.accessToken= await getRefreshToken(currentUser.refreshToken);
+          if(currentUser.accessToken)
+          {
+            localStorage.setItem("currentUser", JSON.stringify(currentUser))
+            return fetchUsers();
+          }
+          else
+          {
+            console.log("Access Token not Found")
+          }
+
+        }
+        toast.error("Access Failed");
         console.log(error.message)
       }
     }
     fetchUsers();
   }, []);
 
-  const getRefreshToken = async () => {
+
+  const getRefreshToken = async (refreshToken) => {
     try {
-      const response = await axios.post("http://localhost:8000/users/refresh-token", {
-        refreshToken,
+      console.log("refreshToken", refreshToken)
+      const response = await axios.post("http://localhost:8000/users/refreshToken", {
+        refreshToken: refreshToken,
       });
       if (response.data.accessToken) {
         setAccessToken(response.data.accessToken);
@@ -56,6 +72,15 @@ function App() {
       return null;
     }
   };
+
+
+  const handleLogout=()=>
+  {
+    localStorage.removeItem("currentUser");
+    setUser(null);
+    setTask(null);
+    navigate("/")
+  }
 
   return (
     <div>
@@ -95,7 +120,7 @@ function App() {
 
 
 <Route
-          path="/show"
+          path="/tasks"
           element={
             <ShowTodo
               username={username}
@@ -111,6 +136,7 @@ function App() {
               setAccessToken={setAccessToken}
               setRefreshToken={setRefreshToken}
               getRefreshToken={getRefreshToken}
+              handleLogout={handleLogout}
             />
           }
         />
