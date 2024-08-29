@@ -16,11 +16,13 @@ export default function ShowTodo({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("pending");
+  const [category,setCategory] = useState("Personal");
   const [dueDate, setDueDate] = useState("");
 
   const [editedTitle, setEditedTitle] = useState("");
   const [editedDescription, setEditedDescription] = useState("");
   const [editedStatus, setEditedStatus] = useState("");
+  const [editedCategory, setEditedCategory] = useState("");
   const [editedDueDate, setEditedDueDate] = useState("");
   const [editedId, setEditedId] = useState(null);
   const [type, setType] = useState("all");
@@ -64,12 +66,6 @@ export default function ShowTodo({
     e.preventDefault();
 
     try {
-      console.log("Before Adding Task", {
-        title,
-        description,
-        dueDate,
-        status,
-      });
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
       const response = await axios.post(
         "http://localhost:8000/tasks",
@@ -78,6 +74,7 @@ export default function ShowTodo({
           description,
           status,
           dueDate,
+          category
         },
         {
           headers: {
@@ -108,6 +105,7 @@ export default function ShowTodo({
     setEditedTitle(t.title);
     setEditedDescription(t.description);
     setEditedStatus(t.status);
+    setEditedCategory(t.category);
     setEditedDueDate(t.dueDate);
     setSidebarOpen(true);
     setIsEditing(true);
@@ -115,13 +113,6 @@ export default function ShowTodo({
 
   const handleSave = async () => {
     try {
-      console.log("Sending update for Task ID:", editedId);
-      console.log("Updated Task Data:", {
-        title: editedTitle,
-        description: editedDescription,
-        status: editedStatus,
-        dueDate: editedDueDate,
-      });
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
       const response = await axios.put(
         `http://localhost:8000/tasks/${editedId}`,
@@ -129,6 +120,7 @@ export default function ShowTodo({
           title: editedTitle,
           description: editedDescription,
           status: editedStatus,
+          category:editedCategory,
           dueDate: editedDueDate,
         },
         {
@@ -309,6 +301,10 @@ export default function ShowTodo({
                   <p className="head">Due Date: </p>
                   <p>{new Date(selectedTask.dueDate).toISOString().split("T")[0]}</p>
                 </div>
+                <div className="dueDate-des">
+                  <p className="head">Category: </p>
+                  <p>{selectedTask.category}</p>
+                </div>
                 <div className="status-des">
                   <p className="head">Status:</p>
                   <p>{selectedTask.status}</p>
@@ -343,9 +339,18 @@ export default function ShowTodo({
                   <option value="completed">Completed</option>
                 </select>
                 <br />
+                <select
+                  value={editedCategory}
+                  onChange={(e) => setEditedCategory(e.target.value)}
+                >
+                  <option value="Personal">Personal</option>
+                  <option value="University">University</option>
+                  <option value="Office">Office</option>
+                </select>
+                <br />
                 <input
                   type="date"
-                  value={editedDueDate}
+                  value={editedDueDate ? new Date(editedDueDate).toISOString().substring(0, 10) : ''}
                   onChange={(e) => setEditedDueDate(e.target.value)}
                 />
                 <br />
@@ -359,7 +364,7 @@ export default function ShowTodo({
           </div>
         )}
 
-        {modal == true && (
+        {modal === true && (
           <div className="modal-overlay">
             <div className="modal-content">
               <button className="modal-close" onClick={() => setModal(false)}>
@@ -368,6 +373,7 @@ export default function ShowTodo({
               <h3>Add Task</h3>
               <form className="add-form" onSubmit={(e) => addTask(e)}>
                 <input
+                className="title-input"
                   type="text"
                   placeholder="Enter Title"
                   value={title}
@@ -377,12 +383,14 @@ export default function ShowTodo({
                 />
                 <input
                   type="text"
+                  className="description-input"
                   placeholder="Enter Description"
                   value={description}
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}
                 />
+                <label>Select Status</label>
                 <select
                   value={status}
                   onChange={(e) => {
@@ -392,7 +400,19 @@ export default function ShowTodo({
                   <option value="pending">Pending</option>
                   <option value="completed">Completed</option>
                 </select>
+                <label>Select Category</label>
+                <select
+                  value={category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                >
+                  <option value="Personal">Personal</option>
+                  <option value="University">University</option>
+                  <option value="Office">Office</option>
+                </select>
                 <input
+                className="date-input"
                   type="date"
                   placeholder="Enter Due Date"
                   value={dueDate}

@@ -151,7 +151,7 @@ align-self: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   .sidebar-edit textarea{
-    width: 50%;
+    width: 51%;
     padding: 10px;
     margin-bottom: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -227,6 +227,7 @@ align-self: center;
     color: white;
     font-weight: bold;
     background-color: #886bfe;
+    margin-top: 20px;
   }
   .submit-task-btn:hover
   {

@@ -10,10 +10,8 @@ export default function Login({
   setName,
   password,
   setPassword,
-  user,setUser,task,setTask,
-  accessToken,
+  setUser,setTask,
   setAccessToken,
-  refreshToken,
   setRefreshToken,
 }) {
   const navigate = useNavigate();

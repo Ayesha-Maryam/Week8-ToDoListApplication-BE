@@ -13,6 +13,7 @@ try{
         description:req.body.description,
         dueDate:req.body.dueDate,
         status:req.body.status,
+        category: req.body.category,
         userId: req.user.userId
     })
     newTask= await newTask.save();
@@ -67,7 +68,8 @@ async function updateTask(req, res)
             {title:req.body.title,
                 description:req.body.description,
                 dueDate:req.body.dueDate,
-                status:req.body.status
+                status:req.body.status,
+                category: req.body.category
             }
         )
         if(!task)

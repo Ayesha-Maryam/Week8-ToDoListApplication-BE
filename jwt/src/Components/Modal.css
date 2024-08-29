@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -20,7 +21,12 @@
     width: 300px;
     color: black
   }
-  
+  .modal-content h3
+  {
+    font-family: "Oleo Script", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
   .modal-close {
     position: absolute;
     top: 10px;
@@ -43,13 +49,29 @@
   .add-form input{
     width:90%;
     padding:10px;
-    margin-bottom: 10px;;
   }
+.title-input
+{
+  margin-bottom: 25px;
+}
+.description-input
+{
+  margin-bottom: 15px;
+}
+.date-input
+{
+  margin-top: 10px;;
+}
   .add-form select{
     width:98%;
     padding:10px;
-    margin-bottom: 10px;;
+    margin-bottom: 15px;
 
+  }
+  .add-form label{
+    font-size: small;
+    padding-left: 2px;
+    color: gray;
   }
   .submit-btn
   {

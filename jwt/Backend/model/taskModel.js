@@ -21,6 +21,12 @@ const taskSchema=new mongoose.Schema({
         enum:['pending', 'completed'],
         default:'pending',
     },
+    category:
+    {
+        type:String,
+        enum:['Personal','University','Office'],
+        default:'Personal',
+    },
     userId:
     {
         type:mongoose.Schema.ObjectId,

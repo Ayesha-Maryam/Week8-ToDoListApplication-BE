@@ -37,7 +37,7 @@ export default function SignUp({username, setName, password, setPassword}) {
     <div className="signup">
       <div className="left-container">
         <h3>Start your journey with us</h3>
-        <img src={image} />
+        <img src={image} alt="" />
       </div>
       <div className="right-container">
         <div className="form-content">
